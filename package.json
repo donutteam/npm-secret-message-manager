@@ -1,0 +1,25 @@
+{
+  "name": "@donutteam/secret-message-manager",
+  "version": "1.0.0",
+  "description": "A class for easily encrypting and decrypting secret messages.",
+  "main": "./index.js",
+  "scripts": {
+    "lint": "eslint . -c ./.eslintrc.cjs",
+    "lint-fix": "eslint . -c ./.eslintrc.cjs --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donutteam/secret-message-manager.git"
+  },
+  "keywords": [
+    "aes256",
+    "encryption",
+    "decryption"
+  ],
+  "author": "Donut Team",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@donutteam/eslint-config": "^1.0.6"
+  }
+}
