@@ -4,12 +4,14 @@
   "description": "A class for easily encrypting and decrypting secret messages.",
   "main": "./index.js",
   "scripts": {
+    "build": "npx rimraf lib && npx tsc",
     "lint": "eslint . -c ./.eslintrc.cjs",
-    "lint-fix": "eslint . -c ./.eslintrc.cjs --fix"
+    "lint-fix": "eslint . -c ./.eslintrc.cjs --fix",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/donutteam/secret-message-manager.git"
+    "url": "https://github.com/donutteam/npm-secret-message-manager.git"
   },
   "keywords": [
     "aes256",
@@ -20,6 +22,10 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@donutteam/eslint-config": "^1.0.6"
+    "@donutteam/eslint-config": "^2.0.0",
+    "@types/node": "^18.13.0",
+    "eslint": "^8.34.0",
+    "rimraf": "^4.1.2",
+    "typescript": "^4.9.5"
   }
 }

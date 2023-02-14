@@ -2,11 +2,23 @@
 // Imports
 //
 
-import crypto from "crypto";
+import crypto from "node:crypto";
 
 //
 // Class
 //
+
+export interface SecretMessageManagerOptions
+{
+	/** The method to use. Optional, defaults to "aes-256-cbc". */
+	algorithm? : string;
+
+	/** The length of initialization vectors. Optional, defaults to 16. */
+	initializationVectorLength? : number;
+
+	/** The encryption key. */
+	key : string;
+}
 
 /**
  * A class for easily encrypting and decrypting secret messages.
@@ -17,36 +29,21 @@ import crypto from "crypto";
  */
 export class SecretMessageManager
 {
-	/**
-	 * The algoritm to use.
-	 *
-	 * @type {String}
-	 */
+	/** The algoritm to use. */
 	algorithm = "aes-256-cbc";
 
-	/**
-	 * The length of initialization vectors.
-	 *
-	 * @type {Number}
-	 */
+	/** The length of initialization vectors. */
 	initializationVectorLength = 16;
 
-	/**
-	 * The encryption key.
-	 * 
-	 * @type {String}
-	 */
+	/** The encryption key. */
 	key;
 
 	/**
 	 * Constructs a new SecretMessageManager.
 	 * 
-	 * @param {Object} options Options for the manager.
-	 * @param {String} [options.algorithm] The method to use. Optional, defaults to "aes-256-cbc".
-	 * @param {Number} [options.initializationVectorLength] The length of initialization vectors. Optional, defaults to 16.
-	 * @param {String} options.key The encryption key.
+	 * @author Loren Goodwin
 	 */
-	constructor(options)
+	constructor(options : SecretMessageManagerOptions)
 	{
 		if (options.key == null)
 		{
@@ -63,12 +60,12 @@ export class SecretMessageManager
 	/**
 	 * Encrypts text with the process' secret message key.
 	 *
-	 * @param {String} plainText Text to encrypt.
-	 * @returns {String} The encrypted text.
+	 * @param plainText The plain text to encrypt.
+	 * @returns The encrypted text.
 	 * @author Loren Goodwin
 	 * @author Tiriel
 	 */
-	encrypt(plainText)
+	encrypt(plainText : string) : string
 	{
 		if (process.versions.openssl <= "1.0.1f")
 		{
@@ -91,12 +88,12 @@ export class SecretMessageManager
 	/**
 	 * Decrypts text with the process' secret message key.
 	 *
-	 * @param {String} encryptedMessage Text to decrypt.
-	 * @returns {String} The decrypted text.
+	 * @param encryptedMessage The encrypted text to decrypt.
+	 * @returns The decrypted text.
 	 * @author Loren Goodwin
 	 * @author Tiriel
 	 */
-	decrypt(encryptedMessage)
+	decrypt(encryptedMessage : string) : string
 	{
 		const textParts = encryptedMessage.split(":", 2);
 
